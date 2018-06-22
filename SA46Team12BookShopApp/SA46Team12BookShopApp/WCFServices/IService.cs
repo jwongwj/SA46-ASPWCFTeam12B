@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -12,19 +13,34 @@ namespace SA46Team12BookShopApp.WCFServices
     interface IService
     {
         [OperationContract]
-        [WebGet(UriTemplate = "/WCFBook/{BookID}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/Book/{BookID}", ResponseFormat = WebMessageFormat.Json)]
         Book GetBook(string BookID);
 
-        [OperationContract]
-        [WebGet(UriTemplate = "/WCFBooks", ResponseFormat = WebMessageFormat.Json)]
-        List<Book> GetBookList();
 
         [OperationContract]
-        [WebGet(UriTemplate = "/WCFBookISBN/{ISBN}", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/BookImage/{BookID}", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Bare)]
+        Stream GetImage(string BookID);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Category/{CategoryID}", ResponseFormat = WebMessageFormat.Json)]
+        Category GetCategory(string CategoryID);
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Books", ResponseFormat = WebMessageFormat.Json)]
+        List<Book> GetBookList();
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Categories", ResponseFormat = WebMessageFormat.Json)]
+        List<Category> GetCategoryList();
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/BookISBN/{ISBN}", ResponseFormat = WebMessageFormat.Json)]
         Book GetBookbyISBN(string ISBN);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/WCFUserOrders", ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/UserOrders", ResponseFormat = WebMessageFormat.Json)]
         List<OrderHeader> GetUserOrders();
 
         [OperationContract]

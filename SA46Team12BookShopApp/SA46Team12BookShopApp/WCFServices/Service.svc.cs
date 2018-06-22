@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 
 namespace SA46Team12BookShopApp.WCFServices
@@ -44,15 +45,33 @@ namespace SA46Team12BookShopApp.WCFServices
             return BusinessLogic.GetBookbyISBN(ISBN);
         }
 
+
+        public Category GetCategory(string CategoryID)
+        {
+            int id = Convert.ToInt32(CategoryID);
+            return BusinessLogic.GetCategorybyID(id);
+        }
         public List<Book> GetBookList()
         {
-            return BusinessLogic.GetAllBooks();
+           return BusinessLogic.GetAllBooks();
+        }
+        public List<Category> GetCategoryList()
+        {
+            return BusinessLogic.GetAllCategories();
         }
 
         public List<OrderHeader> GetUserOrders()
         {
             // I need a method here to somehow decrypt the UserID in Database table
             return BusinessLogic.GetUserOrders();
+        }
+
+
+        public Stream GetImage(string BookID)
+        {
+            FileStream fs = File.OpenRead(@"C:\a.jpg");
+            WebOperationContext.Current.OutgoingResponse.ContentType = "image/jpeg";
+            return fs;
         }
     }
 }

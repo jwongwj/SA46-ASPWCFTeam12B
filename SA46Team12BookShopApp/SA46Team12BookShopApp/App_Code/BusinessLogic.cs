@@ -15,11 +15,25 @@ namespace SA46Team12BookShopApp
                 return entities.Books.Take(4).ToList<Book>(); //todo
             }
         }
+        public static List<Category> GetAllCategories()
+        {
+            using (BooksDB entities = new BooksDB())
+            {
+                return entities.Categories.ToList<Category>(); //todo
+            }
+        }
         public static Book GetBookbyID(int BookID)
         {
             using (BooksDB entities = new BooksDB())
             {
                 return entities.Books.Where(x => x.BookID == BookID).FirstOrDefault(); //todo
+            }
+        }
+        public static Category GetCategorybyID(int CateogryID)
+        {
+            using (BooksDB entities = new BooksDB())
+            {
+                return entities.Categories.Where(x => x.CategoryID == CateogryID).FirstOrDefault(); //todo
             }
         }
         public static Book GetBookbyISBN(string ISBN)
