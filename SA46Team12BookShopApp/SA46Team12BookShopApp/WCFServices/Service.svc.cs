@@ -73,5 +73,30 @@ namespace SA46Team12BookShopApp.WCFServices
             WebOperationContext.Current.OutgoingResponse.ContentType = "image/jpeg";
             return fs;
         }
+
+
+        public Book UpdateBook(Book b)
+        {
+            Book updateBook;
+            using (BooksDB entities = new BooksDB())
+            {
+                try
+                {
+                    updateBook = entities.Books.Find(b.BookID);
+                    updateBook.Author = b.Author;
+                    updateBook.ISBN = b.ISBN;
+                    updateBook.Price = b.Price;
+                    updateBook.Stock = b.Stock;
+                    updateBook.Title = b.Title;
+                    updateBook.CategoryID = b.CategoryID;
+                    entities.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    return b;
+                }
+            }
+            return updateBook;
+        }
     }
 }

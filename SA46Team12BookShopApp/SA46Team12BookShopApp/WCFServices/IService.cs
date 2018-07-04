@@ -47,6 +47,13 @@ namespace SA46Team12BookShopApp.WCFServices
         [WebInvoke(UriTemplate = "/AddOrder", Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void AddOrder(OrderHeader o, List<OrderDetail> od);
+
+
+
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Update", Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        Book UpdateBook(Book b);
     }
 
     
